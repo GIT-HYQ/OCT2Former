@@ -1,0 +1,11 @@
+ python train.py  --dataset='CAG' \
+ --num_epochs=500 \
+ --data_root='/data/gzist/clr/share/data/Coronary_mix_v4' \
+ --target_root='OCTA-SS/label/segmented_images' \
+ --run_dir='CAG' \
+ --in_channel=1 \
+ --batch_size=8 \
+ --lr=5e-4 \
+ --spec_interpolation \
+ --img_aug \
+ --cuda_id=0 \

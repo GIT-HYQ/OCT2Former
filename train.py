@@ -294,6 +294,8 @@ if __name__ == "__main__":
         from dataset.dataset_ROSE import *
     elif args.dataset == 'OCTA-SS':
         from dataset.dataset_SS import *
+    elif args.dataset == 'CAG':
+        from dataset.dataset_CAG import *
     else:
         print("dataset is not chosen")
 
