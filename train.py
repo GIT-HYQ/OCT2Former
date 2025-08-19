@@ -88,7 +88,7 @@ def train(model, device, args, num_fold=0):
                 outputs = model(image)
                 main_out = outputs["main_out"]
 
-                diceloss = criterion_dice(main_out, label)
+                # diceloss = criterion_dice(main_out, label)
                 celoss = criterion(main_out, label)
                 totall_loss = celoss
 
@@ -112,7 +112,7 @@ def train(model, device, args, num_fold=0):
                 pbar.set_postfix(**{'loss': totall_loss.item()})  
                 pbar.update(args.batch_size)
                 
-        if (epoch+1) % args.val_step == 0:
+        if (epoch+1) % args.val_step == 0 and (epoch+1) > 40:
             mDice, mIoU, mAcc, mSensitivity, mSpecificity, mAuc, mBACC = val(model, dataloader_val, num_train_val, device, args)
             writer.add_scalar("Valid/Dice_val", mDice, step)
             writer.add_scalar("Valid/IoU_val", mIoU, step)

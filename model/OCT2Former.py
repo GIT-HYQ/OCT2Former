@@ -447,6 +447,7 @@ class OCT2Former(nn.Module):
 #center
         aux_feature = []
         feature = []
+        # print(x.shape)
         v1, v2, v3= self.base_encoder(x)
 # 1
 
@@ -454,6 +455,7 @@ class OCT2Former(nn.Module):
         x = self.donv7(torch.cat((x, v2), dim=1))
 #2
         x = self.up2(x)
+        # print(x.shape, v1.shape)
         x = self.donv8(torch.cat((x, v1), dim=1))
         feature.append(x.mean(1))
         out = self.final_out(x)

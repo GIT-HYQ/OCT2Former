@@ -13,6 +13,11 @@ class myDataset(Dataset):
         self.data_mode = data_mode
         self.img_aug = img_aug
 
+        if data_mode=='train':
+            self.transforms = get_transforms_train_OCTA_SS()
+        else:
+            self.transforms = get_transforms_valid()
+
         data_path = data_root
         if data_mode=="train":
             self.name_list = sorted(os.listdir(data_path + '/images/training/'))
@@ -46,9 +51,9 @@ class myDataset(Dataset):
     def __len__(self):  
         return len(self.name_list)
 
-    def __getitem__(self, idx): 
+    def __getitem__(self, index): 
 
-        index = index % len(self)
+        index = index % len(self.name_list)
         name = self.name_list[index]
         image_path, label_path = self.data[index]
 
@@ -61,12 +66,12 @@ class myDataset(Dataset):
 
         image, label = convert_to_tensor(image, label)
         
-        label = (label == 255).float()
+        # label = (label == 255).float()
 
         #image, label = resize(self.crop_size, image, label)
 
         label = label.squeeze()
-
+        # print(name)
         return {
             "image": image,
             "label": label,

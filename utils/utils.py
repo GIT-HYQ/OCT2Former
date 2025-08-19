@@ -59,7 +59,7 @@ def cal_scores(hist, smooth=0.001):
     BACC = (Sensitivity+Specificity)/2
     # print(dice, iou)
     if len(hist) == 4:
-        return dice*100, iou*100,  Sensitivity*100, Sensitivity*100, Specificity*100, BACC*100
+        return [dice*100], [iou*100],  Sensitivity*100, [Sensitivity*100], [Specificity*100], [BACC*100]
 
     return dice[1:]*100, iou[1:]*100,  Sensitivity[1:]*100, Sensitivity[1:]*100, Specificity[1:]*100, BACC[1:]*100
 

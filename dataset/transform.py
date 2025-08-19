@@ -115,7 +115,10 @@ def fetch(image_path, label_path=None):
         #image = image.transpose(Image.ROTATE_90)
         #label = label.transpose(Image.ROTATE_90)
         #tp = True
-    #print(image.size)
+    w, h = image.shape
+    if h != 512 or w != 512:
+        image = cv2.resize(image, (512, 512), interpolation=cv2.INTER_LINEAR)
+        label = cv2.resize(label, (512, 512), interpolation=cv2.INTER_NEAREST)
     return image, label
 
 def convert_to_tensor(image, label=None):
